@@ -3,10 +3,6 @@
 import os
 import sys
 
-# Bootstrap installation of Distribute
-import distribute_setup
-distribute_setup.use_setuptools()
-
 from distutils.util import convert_path
 from distutils.core import Command
 from fnmatch import fnmatchcase
