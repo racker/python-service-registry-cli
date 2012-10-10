@@ -1,6 +1,6 @@
-# Service Registry CLI
+# Rackspace Service Registry CLI
 
-Command line client for Rackspace Cloud Service Registry. The client currenty
+Command line client for Rackspace Service Registry. The client currenty
 only offers read-only functionality and allows users to:
 
 * view account limits
