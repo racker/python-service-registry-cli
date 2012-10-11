@@ -31,7 +31,9 @@ class ListCommand(BaseListCommand, Lister):
 
     def take_action(self, parsed_args):
         client = get_client(parsed_args)
-        values = client.sessions.list()['values']
+        marker = parsed_args.marker if parsed_args.marker else None
+        limit = parsed_args.limit if parsed_args.limit else None
+        values = client.sessions.list(marker=marker, limit=limit)['values']
         session_tuples = [(value['id'],
                           value['heartbeat_timeout'],
                           format_timestamp(value['last_seen'] / 1000),

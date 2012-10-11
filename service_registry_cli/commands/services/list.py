@@ -31,10 +31,16 @@ class ListCommand(BaseListCommand, Lister):
 
     def take_action(self, parsed_args):
         client = get_client(parsed_args)
+
+        marker = parsed_args.marker if parsed_args.marker else None
+        limit = parsed_args.limit if parsed_args.limit else None
+
+        kwargs = {'marker': marker, 'limit': limit}
+
         if parsed_args.tag:
-            values = client.services.list_for_tag(parsed_args.tag)['values']
+            values = client.services.list_for_tag(parsed_args.tag, **kwargs)['values']
         else:
-            values = client.services.list()['values']
+            values = client.services.list(**kwargs)['values']
         service_tuples = [(value['id'],
                           value['session_id'],
                           ', '.join(value['tags']),

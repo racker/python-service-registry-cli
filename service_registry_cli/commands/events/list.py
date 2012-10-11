@@ -37,7 +37,8 @@ class ListCommand(BaseListCommand, Lister):
     def take_action(self, parsed_args):
         client = get_client(parsed_args)
         marker = parsed_args.marker if parsed_args.marker else None
-        values = client.events.list(marker=marker)['values']
+        limit = parsed_args.limit if parsed_args.limit else None
+        values = client.events.list(marker=marker, limit=limit)['values']
         event_tuples = [(value['id'],
                         format_timestamp(value['timestamp'] / 1000),
                         value['type'],
