@@ -20,6 +20,7 @@ import logging
 from cliff.lister import Lister
 
 from service_registry_cli.utils import BaseListCommand, get_client
+from service_registry_cli.utils import format_metadata
 
 
 class ListCommand(BaseListCommand, Lister):
@@ -36,7 +37,8 @@ class ListCommand(BaseListCommand, Lister):
             values = client.services.list()['values']
         service_tuples = [(value['id'],
                           value['session_id'],
-                          ', '.join(value['tags']))
+                          ', '.join(value['tags']),
+                          format_metadata(value['metadata']))
                           for value in values]
-        return (('Service ID', 'Session ID', 'Tags'),
+        return (('Service ID', 'Session ID', 'Tags', 'Metadata'),
                 service_tuples)

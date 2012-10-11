@@ -72,7 +72,7 @@ def get_client(parsed_args):
 
 
 def format_metadata(metadata_dict):
-    metadata_str = ""
+    metadata_str = ''
     for key, value in metadata_dict.items():
         metadata_str += '%s: %s,\n' % (key, value)
     metadata_str = metadata_str.strip(',\n')
