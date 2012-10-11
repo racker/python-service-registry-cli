@@ -5,8 +5,7 @@ python:
   - "pypy"
 
 install: pip install -r requirements.txt --use-mirrors
-before_script: python setup.py pep8
-script: exit 0
+script: python setup.py pep8
 
 notifications:
   email:
