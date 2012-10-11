@@ -27,7 +27,7 @@ from service_registry_cli.commands.help import HelpAction
 from service_registry_cli import __version__
 
 CA_CERT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                       'data/cacert.pem')
+                            'data/cacert.pem')
 libcloud.security.CA_CERTS_PATH.insert(0, CA_CERT_PATH)
 
 
