@@ -94,7 +94,7 @@ def format_event_payload(event_response):
     event_payload_str = ''
     event_payload = event_response['payload']
     if event_payload == []:
-        event_payload_str = '[]'
+        event_payload_str = ''
         return event_payload_str
     if event_response['type'] in ['service.join', 'services.timeout']:
         if event_response['type'] == 'service.join':
@@ -105,6 +105,8 @@ def format_event_payload(event_response):
                 if key == 'metadata':
                     metadata_str = format_metadata(value)
                     event_payload_str += 'metadata: %s\n' % (metadata_str)
+                elif key == 'tags':
+                    event_payload_str += '%s: %s\n' % (key, ', '.join(value))
                 else:
                     event_payload_str += '%s: %s\n' % (key, value)
     else:
