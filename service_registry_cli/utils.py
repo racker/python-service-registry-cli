@@ -89,7 +89,7 @@ def format_metadata(metadata_dict):
 
 def format_timestamp(timestamp):
     if not timestamp:
-      return ''
+        return ''
 
     return datetime.fromtimestamp(timestamp) \
                    .strftime('%Y-%m-%d %H:%I:%S')

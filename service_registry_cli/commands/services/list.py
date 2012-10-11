@@ -38,7 +38,8 @@ class ListCommand(BaseListCommand, Lister):
         kwargs = {'marker': marker, 'limit': limit}
 
         if parsed_args.tag:
-            values = client.services.list_for_tag(parsed_args.tag, **kwargs)['values']
+            values = client.services.list_for_tag(parsed_args.tag,
+                                                  **kwargs)['values']
         else:
             values = client.services.list(**kwargs)['values']
         service_tuples = [(value['id'],

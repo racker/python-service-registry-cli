@@ -32,7 +32,8 @@ class ListCommand(BaseListCommand, Lister):
         client = get_client(parsed_args)
         marker = parsed_args.marker if parsed_args.marker else None
         limit = parsed_args.limit if parsed_args.limit else None
-        values = client.configuration.list(marker=marker, limit=limit)['values']
+        values = client.configuration.list(marker=marker,
+                                           limit=limit)['values']
 
         result = [(value['id'], value['value'])
                   for value in values]

@@ -71,7 +71,8 @@ class HelpCommand(Command):
                 self.app.stdout.write('Command "%s" matches:\n\n' % (cmd))
                 for fm in fuzzy_matches:
                     for sub_command, _ in fm[1].items():
-                        self.app.stdout.write(' - %s %s\n' % (fm[0], sub_command))
+                        self.app.stdout.write(' - %s %s\n' % (fm[0],
+                                                              sub_command))
                 return
             cmd = cmd_factory(self.app, search_args)
             full_name = (cmd_name
