@@ -20,7 +20,7 @@ import logging
 from cliff.lister import Lister
 
 from service_registry_cli.utils import BaseListCommand, get_client
-from service_registry_cli.utils import format_metadata
+from service_registry_cli.utils import format_metadata, format_timestamp
 
 
 class ListCommand(BaseListCommand, Lister):
@@ -34,7 +34,7 @@ class ListCommand(BaseListCommand, Lister):
         values = client.sessions.list()['values']
         session_tuples = [(value['id'],
                           value['heartbeat_timeout'],
-                          value['last_seen'],
+                          format_timestamp(value['last_seen'] / 1000),
                           format_metadata(value['metadata']))
                           for value in values]
         return (('Session ID', 'Heartbeat Timeout', 'Last Seen', 'Metadata'),

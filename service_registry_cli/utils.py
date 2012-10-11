@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from datetime import datetime
 from cliff.command import Command
 
 from service_registry import Client
@@ -78,6 +79,14 @@ def format_metadata(metadata_dict):
     metadata_str = metadata_str.strip(',\n')
 
     return metadata_str
+
+
+def format_timestamp(timestamp):
+    if not timestamp:
+      return ''
+
+    return datetime.fromtimestamp(timestamp) \
+                   .strftime('%Y-%m-%d %H:%I:%S')
 
 
 # TODO

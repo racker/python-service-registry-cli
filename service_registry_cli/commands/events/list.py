@@ -16,7 +16,6 @@
 # limitations under the License.
 
 import logging
-from datetime import datetime
 
 from cliff.lister import Lister
 
@@ -24,6 +23,7 @@ from service_registry_cli.utils import (
     BaseListCommand,
     get_client,
     format_metadata,
+    format_timestamp,
     format_event_payload
 )
 
@@ -39,7 +39,7 @@ class ListCommand(BaseListCommand, Lister):
         marker = parsed_args.marker if parsed_args.marker else None
         values = client.events.list(marker=marker)['values']
         event_tuples = [(value['id'],
-                        datetime.fromtimestamp(value['timestamp'] / 1000).strftime('%Y-%m-%d %H:%I:%S'),
+                        format_timestamp(value['timestamp'] / 1000),
                         value['type'],
                         format_event_payload(value))
                         for value in values]
