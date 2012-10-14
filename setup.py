@@ -73,7 +73,7 @@ setup(
     provides=[],
     install_requires=[
         'cliff >= 1.2.2-dev',
-        'service-registry >= 0.1.1'
+        'service-registry >= 0.1.3'
     ],
     dependency_links = [
         'https://github.com/Kami/cliff/tarball/dev#egg=cliff-1.2.2-dev'
