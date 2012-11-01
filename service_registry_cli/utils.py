@@ -91,7 +91,7 @@ def format_timestamp(timestamp):
     if not timestamp:
         return ''
 
-    return datetime.fromtimestamp(timestamp) \
+    return datetime.fromtimestamp(timestamp / 1000) \
                    .strftime('%Y-%m-%d %H:%I:%S')
 
 

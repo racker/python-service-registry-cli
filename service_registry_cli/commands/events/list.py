@@ -40,7 +40,7 @@ class ListCommand(BaseListCommand, Lister):
         limit = parsed_args.limit if parsed_args.limit else None
         values = client.events.list(marker=marker, limit=limit)['values']
         event_tuples = [(value['id'],
-                        format_timestamp(value['timestamp'] / 1000),
+                        format_timestamp(value['timestamp']),
                         value['type'],
                         format_event_payload(value))
                         for value in values]

@@ -36,7 +36,7 @@ class ListCommand(BaseListCommand, Lister):
         values = client.sessions.list(marker=marker, limit=limit)['values']
         session_tuples = [(value['id'],
                           value['heartbeat_timeout'],
-                          format_timestamp(value['last_seen'] / 1000),
+                          format_timestamp(value['last_seen']),
                           format_metadata(value['metadata']))
                           for value in values]
         return (('Session ID', 'Heartbeat Timeout', 'Last Seen', 'Metadata'),
