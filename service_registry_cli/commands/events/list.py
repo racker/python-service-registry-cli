@@ -38,7 +38,18 @@ class ListCommand(BaseListCommand, Lister):
         client = get_client(parsed_args)
         marker = parsed_args.marker if parsed_args.marker else None
         limit = parsed_args.limit if parsed_args.limit else None
-        values = client.events.list(marker=marker, limit=limit)['values']
+
+        result = client.events.list(marker=marker, limit=limit)
+        values = result['values']
+        metadata = result['metadata']
+        limit, marker, next_marker = metadata['limit'], metadata['marker'], \
+            metadata['next_marker']
+
+        # Hack
+        parsed_args.returned_limit = limit
+        parsed_args.returned_marker = marker
+        parsed_args.returned_next_marker = next_marker
+
         event_tuples = [(value['id'],
                         format_timestamp(value['timestamp']),
                         value['type'],

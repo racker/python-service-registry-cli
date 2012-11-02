@@ -38,10 +38,20 @@ class ListCommand(BaseListCommand, Lister):
         kwargs = {'marker': marker, 'limit': limit}
 
         if parsed_args.tag:
-            values = client.services.list_for_tag(parsed_args.tag,
-                                                  **kwargs)['values']
+            result = client.services.list_for_tag(parsed_args.tag, **kwargs)
         else:
-            values = client.services.list(**kwargs)['values']
+            result = client.services.list(**kwargs)
+
+        values = result['values']
+        metadata = result['metadata']
+        limit, marker, next_marker = metadata['limit'], metadata['marker'], \
+            metadata['next_marker']
+
+        # Hack
+        parsed_args.returned_limit = limit
+        parsed_args.returned_marker = marker
+        parsed_args.returned_next_marker = next_marker
+
         service_tuples = [(value['id'],
                           value['session_id'],
                           ', '.join(value['tags']),
