@@ -25,6 +25,20 @@ For example:
 
 `raxsr help services list`
 
+### Custom Output Formatter
+
+To specify a custom formatter, use `-f` option. For example:
+
+`raxsr services list -f json`
+
+#### Available Formatters
+
+* table
+* csv
+* json
+* yaml
+* html
+
 # License
 
 Library is distributed under the [Apache license](http://www.apache.org/licenses/LICENSE-2.0.html).
