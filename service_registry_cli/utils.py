@@ -17,6 +17,7 @@
 
 from datetime import datetime
 from cliff.command import Command
+from cliff.lister import Lister
 
 from service_registry import Client
 
@@ -31,13 +32,17 @@ class BaseCommand(Command):
         return parser
 
 
-class BaseListCommand(BaseCommand):
+class BaseListCommand(BaseCommand, Lister):
     def get_parser(self, prog_name):
         parser = super(BaseListCommand, self).get_parser(prog_name=prog_name)
         parser.add_argument('--limit', dest='limit')
         parser.add_argument('--marker', dest='marker')
         parser.add_argument('--tag', dest='tag')
         return parser
+
+    @property
+    def formatter_default(self):
+        return 'paginated_table'
 
 
 class BaseShowCommand(BaseCommand):

@@ -88,7 +88,10 @@ setup(
     entry_points={
         'console_scripts': [
             'raxsr = service_registry_cli.main:main'
-        ]
+        ],
+        'cliff.formatter.list': [
+            'paginated_table = service_registry_cli.formatters:PaginatedListFormatter',
+        ],
     },
     zip_safe=False
 )
