@@ -35,6 +35,8 @@ class ServiceRegistryApp(App):
 
     log = logging.getLogger(__name__)
 
+    DEFAULT_VERBOSE_LEVEL = 0
+
     def __init__(self):
         super(ServiceRegistryApp, self).__init__(
             description='Rackspace Cloud Service Registry Command Line' +
@@ -54,8 +56,8 @@ class ServiceRegistryApp(App):
             '-h', '--help',
             action=HelpAction,
             nargs=0,
-            default=self,  # tricky
-            help="show this help message and exit",
+            default=self,
+            help='show this help message and exit',
         )
         return parser
 
