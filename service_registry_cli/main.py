@@ -39,8 +39,7 @@ class ServiceRegistryApp(App):
 
     def __init__(self):
         super(ServiceRegistryApp, self).__init__(
-            description='Rackspace Cloud Service Registry Command Line' +
-                        ' Interface',
+            description='Rackspace Service Registry Command Line Client',
             version=__version__,
             command_manager=CommandManager('service_registry'),
         )
