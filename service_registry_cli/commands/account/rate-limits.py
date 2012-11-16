@@ -25,9 +25,9 @@ from service_registry_cli.utils import (
 )
 
 
-class LimitsCommand(BaseListCommand, Lister):
+class RateLimitsCommand(BaseListCommand, Lister):
     """
-    Return account limits
+    Return account rate limits
     """
     log = logging.getLogger(__name__)
 
