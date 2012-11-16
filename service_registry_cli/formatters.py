@@ -30,10 +30,11 @@ class PaginatedListFormatter(TableFormatter):
         super(PaginatedListFormatter, self).emit_list(column_names, data,
                                                       stdout, parsed_args)
 
-        if len(data) >= 1:
+        if len(data) >= 1 and parsed_args.returned_limit:
             print ''
 
-        print 'Limit: %s' % (parsed_args.returned_limit)
+        if parsed_args.returned_limit:
+            print 'Limit: %s' % (parsed_args.returned_limit)
 
         if parsed_args.returned_marker:
             print 'Marker in use: %s' % (parsed_args.returned_marker)

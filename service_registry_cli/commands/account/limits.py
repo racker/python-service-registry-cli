@@ -34,6 +34,11 @@ class LimitsCommand(BaseListCommand, Lister):
     def take_action(self, parsed_args):
         client = get_client(parsed_args)
         value = client.account.get_limits()
+
+        parsed_args.returned_limit = None
+        parsed_args.returned_marker = None
+        parsed_args.returned_next_marker = None
+
         rate_tuples = [(k,
                         value['rate'][k]['window'],
                         value['rate'][k]['used'],
