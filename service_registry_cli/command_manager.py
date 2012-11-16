@@ -59,7 +59,7 @@ class CommandManager(object):
                 module_path = '%s.commands.%s.%s' % (module_name,
                                                      commands_directory,
                                                      name)
-                command_class = '%sCommand' % (name.title())
+                command_class = '%sCommand' % (name.title().replace('-', ''))
 
                 LOG.debug('Found command %s %s', directory, name)
 
