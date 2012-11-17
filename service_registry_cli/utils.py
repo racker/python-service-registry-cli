@@ -62,7 +62,7 @@ def get_client(parsed_args):
         raise ValueError('Missing required argument: username')
 
     if not api_key:
-        raise ValueError('Missing required argument: api_key')
+        raise ValueError('Missing required argument: api-key')
 
     kwargs = {}
 
