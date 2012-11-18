@@ -2,3 +2,4 @@ pep8
 service-registry
 -e git+git://github.com/Kami/cliff.git@allow_user_to_specify_extra_ArgumentParser_kwargs#egg=cliff
 cliff-tablib
+cliff-rackspace
