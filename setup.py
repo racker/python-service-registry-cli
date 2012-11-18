@@ -26,7 +26,7 @@ def read_version_string():
 # https://github.com/apache/libcloud/blob/trunk/setup.py
 
 class Pep8Command(Command):
-    description = "Run pep8 script"
+    description = 'Run pep8 script'
     user_options = []
 
     def initialize_options(self):
@@ -74,6 +74,7 @@ setup(
     install_requires=[
         'cliff >= 1.2.2-dev',
         'cliff-tablib >= 1.0',
+        'cliff-rackspace >= 0.1.0',
         'service-registry >= 0.1.3'
     ],
     dependency_links = [
@@ -90,7 +91,7 @@ setup(
             'raxsr = service_registry_cli.main:main'
         ],
         'cliff.formatter.list': [
-            'paginated_table = service_registry_cli.formatters:PaginatedListFormatter',
+            'paginated_table = cliff_rackspace.formatters:PaginatedListFormatter',
         ],
     },
     zip_safe=False

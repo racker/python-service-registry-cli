@@ -18,16 +18,19 @@
 import os
 import logging
 import sys
+from os.path import join as pjoin
 
 import libcloud.security
 from cliff.app import App
+from cliff_rackspace.command_manager import CommandManager
 
-from service_registry_cli.command_manager import CommandManager
 from service_registry_cli.commands.help import HelpAction
 from service_registry_cli import __version__
 
 CA_CERT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                             'data/cacert.pem')
+COMMANDS_PATH = pjoin(os.path.dirname(__file__), 'commands/')
+
 libcloud.security.CA_CERTS_PATH.insert(0, CA_CERT_PATH)
 
 
@@ -41,7 +44,8 @@ class ServiceRegistryApp(App):
         super(ServiceRegistryApp, self).__init__(
             description='Rackspace Service Registry Command Line Client',
             version=__version__,
-            command_manager=CommandManager('service_registry'),
+            command_manager=CommandManager('service_registry_cli',
+                                           COMMANDS_PATH),
         )
 
     def build_option_parser(self, description, version):
