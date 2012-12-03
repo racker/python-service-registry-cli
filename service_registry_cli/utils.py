@@ -37,7 +37,6 @@ class BaseListCommand(BaseCommand, Lister):
         parser = super(BaseListCommand, self).get_parser(prog_name=prog_name)
         parser.add_argument('--limit', dest='limit')
         parser.add_argument('--marker', dest='marker')
-        parser.add_argument('--tag', dest='tag')
         return parser
 
     @property
