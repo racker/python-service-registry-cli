@@ -37,13 +37,8 @@ class ListCommand(BaseListCommand, Lister):
 
         values = result['values']
         metadata = result['metadata']
-        limit, marker, next_marker = metadata['limit'], metadata['marker'], \
-            metadata['next_marker']
 
-        # Hack
-        parsed_args.returned_limit = limit
-        parsed_args.returned_marker = marker
-        parsed_args.returned_next_marker = next_marker
+        parsed_args.returned_metadata = metadata
 
         result = [(value['id'], value['value'])
                   for value in values]
