@@ -96,10 +96,9 @@ def format_timestamp(timestamp):
         return ''
 
     return datetime.fromtimestamp(timestamp / 1000) \
-                   .strftime('%Y-%m-%d %H:%I:%S')
+                   .strftime('%Y-%m-%d %H:%M:%S')
 
 
-# TODO
 def format_event_payload(event_response):
     event_payload_str = ''
     event_payload = event_response['payload']
