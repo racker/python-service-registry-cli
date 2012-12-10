@@ -16,4 +16,5 @@ if [ ! -f ${basedir}/../dist/service-registry-cli-*/service_registry_cli/data/ca
     exit 1
 fi
 
+echo "All the necessary files are present"
 exit 0
