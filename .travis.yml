@@ -5,7 +5,7 @@ python:
   - "pypy"
 
 install: pip install -r requirements.txt --use-mirrors
-script: python setup.py pep8
+script: ./scripts/verify_code_bundle.sh && python setup.py pep8
 
 notifications:
   email:
