@@ -69,8 +69,6 @@ setup(
         'pep8': Pep8Command,
     },
     platforms=['Any'],
-    scripts=[],
-    provides=[],
     install_requires=[
         'cliff >= 1.2.2-dev',
         'cliff-tablib >= 1.0',
@@ -80,9 +78,10 @@ setup(
     dependency_links = [
         'https://github.com/Kami/cliff/tarball/dev#egg=cliff-1.2.2-dev'
     ],
-    namespace_packages=[],
     packages=find_packages(),
-    include_package_data=True,
+    package_dir={
+        'service_registry_cli': 'service_registry_cli'
+    },
     package_data={
         'service_registry_cli': ['data/cacert.pem'],
     },
@@ -93,6 +92,5 @@ setup(
         'cliff.formatter.list': [
             'paginated_table = cliff_rackspace.formatters:PaginatedListFormatter',
         ],
-    },
-    zip_safe=False
+    }
 )
