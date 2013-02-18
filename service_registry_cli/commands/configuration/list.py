@@ -42,6 +42,7 @@ class ListCommand(BaseListCommand, Lister):
         kwargs = {'marker': marker, 'limit': limit}
 
         if parsed_args.namespace:
+            kwargs['namespace'] = parsed_args.namespace
             result = client.configuration.list_for_namespace(**kwargs)
         else:
             result = client.configuration.list(**kwargs)
