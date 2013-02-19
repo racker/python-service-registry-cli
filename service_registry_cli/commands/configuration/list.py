@@ -28,12 +28,24 @@ class ListCommand(BaseListCommand, Lister):
     """
     log = logging.getLogger(__name__)
 
+    def get_parser(self, prog_name):
+        parser = super(ListCommand, self).get_parser(prog_name=prog_name)
+        parser.add_argument('--namespace', dest='namespace')
+        return parser
+
     def take_action(self, parsed_args):
         client = get_client(parsed_args)
+
         marker = parsed_args.marker if parsed_args.marker else None
         limit = parsed_args.limit if parsed_args.limit else None
 
-        result = client.configuration.list(marker=marker, limit=limit)
+        kwargs = {'marker': marker, 'limit': limit}
+
+        if parsed_args.namespace:
+            kwargs['namespace'] = parsed_args.namespace
+            result = client.configuration.list_for_namespace(**kwargs)
+        else:
+            result = client.configuration.list(**kwargs)
 
         values = result['values']
         metadata = result['metadata']
