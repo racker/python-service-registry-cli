@@ -1,13 +1,13 @@
 # Rackspace Service Registry CLI
 
-Command line client for Rackspace Service Registry. The client currenty
-only offers read-only functionality and allows users to:
+Command line client for Rackspace Service Registry. The client currently allows
+users to:
 
 * view account limits
 * view display active sessions
 * vite active services
 * view events
-* view configuration values
+* view, set and remove configuration values
 
 ## Installation
 
