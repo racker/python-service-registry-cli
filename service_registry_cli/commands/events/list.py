@@ -40,7 +40,7 @@ class ListCommand(BaseListCommand, Lister):
         limit = parsed_args.limit if parsed_args.limit else None
 
         result = client.events.list(marker=marker, limit=limit)
-        values = result['values']
+        values = reversed(result['values'])
         metadata = result['metadata']
 
         parsed_args.returned_metadata = metadata
@@ -50,5 +50,6 @@ class ListCommand(BaseListCommand, Lister):
                         value['type'],
                         format_event_payload(value))
                         for value in values]
+
         return (('Event ID', 'Timestamp', 'Event Type', 'Payload'),
                 event_tuples)
