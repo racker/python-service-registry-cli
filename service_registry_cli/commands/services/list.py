@@ -59,4 +59,4 @@ class ListCommand(BaseListCommand, Lister):
                           format_metadata(value['metadata']))
                           for value in values]
         return (('Service ID', 'Heartbeat Timeout', 'Last Seen', 'Tags',
-                  'Metadata'), service_tuples)
+                 'Metadata'), service_tuples)
