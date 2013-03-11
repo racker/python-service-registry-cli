@@ -28,7 +28,7 @@ from service_registry_cli.utils import (
 
 class GetCommand(BaseShowCommand, ShowOne):
     """
-    Return a single session.
+    Return a single service.
     """
     log = logging.getLogger(__name__)
 
@@ -37,8 +37,9 @@ class GetCommand(BaseShowCommand, ShowOne):
         value = client.services.get(parsed_args.object_id)
         metadata_str = format_metadata(value['metadata'])
         service_tuple = (value['id'],
-                         value['session_id'],
+                         value['heartbeat_timeout'],
+                         value['last_seen'],
                          ', '.join(value['tags']),
                          metadata_str)
-        return (('Service ID', 'Session ID', 'Tags', 'Metadata'),
-                service_tuple)
+        return (('Service ID', 'Heartbeat Timeout', 'Last Seen', 'Tags',
+                 'Metadata'), service_tuple)
