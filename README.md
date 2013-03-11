@@ -4,7 +4,6 @@ Command line client for Rackspace Service Registry. The client currently allows
 users to:
 
 * view account limits
-* view display active sessions
 * vite active services
 * view events
 * view, set and remove configuration values
