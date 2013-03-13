@@ -73,7 +73,7 @@ setup(
         'cliff >= 1.2.2-dev',
         'cliff-tablib >= 1.0',
         'cliff-rackspace >= 0.1.1',
-        'service-registry == 0.1.9'
+        'service-registry >= 0.2.0, < 0.3.0'
     ],
     dependency_links = [
         'https://github.com/Kami/cliff/tarball/dev#egg=cliff-1.2.2-dev'

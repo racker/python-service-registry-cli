@@ -19,7 +19,9 @@ from datetime import datetime
 from cliff.command import Command
 from cliff.lister import Lister
 
-from service_registry import Client
+from service_registry.client import Client
+
+SERVICE_EVENTS = ['service.join', 'service.timeout', 'service.remove']
 
 
 class BaseCommand(Command):
@@ -101,23 +103,21 @@ def format_timestamp(timestamp):
 
 def format_event_payload(event_response):
     event_payload_str = ''
+    event_type = event_response['type']
     event_payload = event_response['payload']
-    if event_payload == []:
-        event_payload_str = ''
-        return event_payload_str
-    if event_response['type'] in ['service.join', 'services.timeout']:
-        if event_response['type'] == 'service.join':
-            event_payload = [event_payload]
 
-        for service in event_payload:
-            for key, value in service.iteritems():
-                if key == 'metadata':
-                    metadata_str = format_metadata(value)
-                    event_payload_str += 'metadata: %s\n' % (metadata_str)
-                elif key == 'tags':
-                    event_payload_str += '%s: %s\n' % (key, ', '.join(value))
-                else:
-                    event_payload_str += '%s: %s\n' % (key, value)
+    if not event_payload:
+        return event_payload_str
+
+    if event_type in SERVICE_EVENTS:
+        for key, value in event_payload.iteritems():
+            if key == 'metadata':
+                metadata_str = format_metadata(value)
+                event_payload_str += 'metadata: %s\n' % (metadata_str)
+            elif key == 'tags':
+                event_payload_str += '%s: %s\n' % (key, ', '.join(value))
+            else:
+                event_payload_str += '%s: %s\n' % (key, value)
     else:
         for key, value in event_payload.iteritems():
             event_payload_str += '%s: %s\n' % (key, value)
