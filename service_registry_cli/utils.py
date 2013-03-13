@@ -19,7 +19,7 @@ from datetime import datetime
 from cliff.command import Command
 from cliff.lister import Lister
 
-from service_registry import Client
+from service_registry.client import Client
 
 
 class BaseCommand(Command):
