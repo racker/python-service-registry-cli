@@ -70,12 +70,12 @@ setup(
     },
     platforms=['Any'],
     install_requires=[
-        'cliff >= 1.2.2-dev',
-        'cliff-tablib >= 1.0',
-        'cliff-rackspace >= 0.1.1',
         # newer version is broken in 2.6, see
         # https://bitbucket.org/catherinedevlin/cmd2/issue/3/fix-a-failure-under-python-26
         'cmd2 == 0.6.4',
+        'cliff >= 1.2.2-dev',
+        'cliff-tablib >= 1.0',
+        'cliff-rackspace >= 0.1.1',
         'service-registry >= 0.2.0, < 0.3.0'
     ],
     dependency_links = [
