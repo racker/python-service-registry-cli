@@ -1,6 +1,5 @@
-cmd2 == 0.6.4
 pep8
-service-registry
--e git+git://github.com/Kami/cliff.git@allow_user_to_specify_extra_ArgumentParser_kwargs#egg=cliff
-cliff-tablib
-cliff-rackspace
+cliff == 1.3.1
+cliff-tablib >= 1.0
+cliff-rackspace >= 0.1.1
+service-registry >= 0.2.0, < 0.3.0
