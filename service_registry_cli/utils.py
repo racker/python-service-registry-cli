@@ -15,11 +15,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+from os.path import join as pjoin, expanduser
 from datetime import datetime
+
+try:
+    import ConfigParser
+except ImportError:
+    import configparser as ConfigParser
+
 from cliff.command import Command
 from cliff.lister import Lister
 
 from service_registry.client import Client
+
+CREDENTIALS_FILE = '.raxrc'
+CONFIG_PATH = pjoin(expanduser('~'), CREDENTIALS_FILE)
 
 SERVICE_EVENTS = ['service.join', 'service.timeout', 'service.remove']
 
@@ -54,8 +65,19 @@ class BaseShowCommand(BaseCommand):
 
 
 def get_client(parsed_args):
-    username = parsed_args.username
-    api_key = parsed_args.api_key
+    config = get_config()
+
+    username = config['username']
+    api_key = config['api_key']
+    if parsed_args.username:
+        username = parsed_args.username
+
+    if parsed_args.api_key:
+        api_key = parsed_args.api_key
+
+    #username = parsed_args.username
+    #api_key = parsed_args.api_key
+
     api_url = parsed_args.api_url
     region = parsed_args.region
 
@@ -124,3 +146,42 @@ def format_event_payload(event_response):
         event_payload_str = event_payload_str.strip(',\n')
 
     return event_payload_str
+
+
+def get_config():
+    keys = [['credentials', 'username', 'username'],
+            ['credentials', 'api_key', 'api_key'],
+            ['api', 'url', 'api_url'],
+            ['auth_api', 'url', 'auth_url'],
+            ['ssl', 'verify', 'ssl_verify']]
+
+    result = {}
+
+    result['username'] = os.getenv('RAXSR_USERNAME', None)
+    result['api_key'] = os.getenv('RAXSR_API_KEY', None)
+    result['api_url'] = os.getenv('RAXSR_API_URL', None)
+    result['auth_url'] = os.getenv('RAXSR_AUTH_URL', None)
+    result['ssl_verify'] = os.getenv('RAXSR_SSL_VERIFY', None)
+
+    config = ConfigParser.ConfigParser()
+    config.read(os.getenv('RAXSR_RAXRC') or CONFIG_PATH)
+
+    for (config_section, config_key, key) in keys:
+        if result[key]:
+            # Already specified as an env variable
+            continue
+
+        try:
+            value = config.get(config_section, config_key)
+        except ConfigParser.Error:
+            continue
+
+        result[key] = value
+
+    # convert "false" to False
+    if result['ssl_verify']:
+        result['ssl_verify'] = not (result['ssl_verify'].lower() == 'false')
+    else:
+        result['ssl_verify'] = True
+
+    return result
